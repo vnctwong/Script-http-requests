@@ -2,12 +2,12 @@ var https = require('https');
 
 var requestOptions = {
     host: 'sytantris.github.io',
-    path: '/http-examples/step2.html'
+    path: '/http-examples/step4.html'
 };
 //by passing options thru function we can call host and path 
 //from key-value objects in another module
 
-function getAndPrintHTML(options) {
+function getHTML(options, callback) {
     //var buffer = [];
     var buffer = '';
 
@@ -24,10 +24,15 @@ function getAndPrintHTML(options) {
         //print variable.
         response.on('end', function () {
             //console.log(buffer.join(''));  // printing here before break prints once
-            console.log(buffer);
+            printHTML(buffer);
+            //console.log(buffer);
             console.log('Response stream complete.');
-        })
-    })
+        });
+    });
 
+    function printHTML(html) {
+        console.log(html);
+
+    }
 }
-getAndPrintHTML(requestOptions);
+getHTML(requestOptions);
