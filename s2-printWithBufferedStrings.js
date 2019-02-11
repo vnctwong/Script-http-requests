@@ -1,7 +1,8 @@
 var https = require('https');
 
 function getAndPrintHTML() {
-    var buffer = "";
+    //var buffer = [];
+    var buffer = '';
     var requestOptions = {
         host: 'sytantris.github.io',
         path: '/http-examples/step2.html'
@@ -11,14 +12,15 @@ function getAndPrintHTML() {
         response.setEncoding('utf8');
 
         response.on('data', function (data) {
-            buffer = buffer + data;
+            //buffer.push(data);
+            buffer += data
             //printing in this parameter may print every chunk
         });
-        //as each chunk recieved, assign to variable
-        //make array from varibles
+        //as each chunk recieved, assign to variable. this data 'loops' itself
         //print variable.
         response.on('end', function () {
-            console.log(buffer); // printing here before break prints once
+            //console.log(buffer.join(''));  // printing here before break prints once
+            console.log(buffer);
             console.log('Response stream complete.');
         })
     })
