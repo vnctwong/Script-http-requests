@@ -4,8 +4,6 @@ var requestOptions = {
     host: 'sytantris.github.io',
     path: '/http-examples/step4.html'
 };
-//by passing options thru function we can call host and path 
-//from key-value objects in another module
 
 function getHTML(options, callback) {
     //var buffer = [];
@@ -24,15 +22,20 @@ function getHTML(options, callback) {
         //print variable.
         response.on('end', function () {
             //console.log(buffer.join(''));  // printing here before break prints once
-            printHTML(buffer);
+            callback(buffer);
             //console.log(buffer);
             console.log('Response stream complete.');
-        });
-    });
+        })
+    })
 
-    function printHTML(html) {
-        console.log(html);
-
-    }
 }
-getHTML(requestOptions);
+
+function printHTML(html) {
+    console.log(html);
+
+}
+getHTML(requestOptions, printHTML);
+
+
+//by passing options thru function we can call host and path 
+//from key-value objects in another module
